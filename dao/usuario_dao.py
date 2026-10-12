@@ -23,9 +23,14 @@ class UsuarioDAO:
             return cursor.fetchone()
 
     def registrar_fallo(self, id_usuario: int, max_intentos: int) -> None:
-        """Suma un intento fallido y bloquea al usuario si llega al máximo."""
+        """Suma un intento fallido y bloquea al usuario si llega al máximo.
+
+        MySQL evalúa las asignaciones del SET de izquierda a derecha, por lo que
+        en la segunda asignación la columna intentos_fallidos ya tiene el valor
+        incrementado. Por eso la comparación se hace sin volver a sumar uno.
+        """
         sql = ("UPDATE usuario SET intentos_fallidos = intentos_fallidos + 1, "
-               "estado = IF(intentos_fallidos + 1 >= %s, 'BLOQUEADO', estado) "
+               "estado = IF(intentos_fallidos >= %s, 'BLOQUEADO', estado) "
                "WHERE id_usuario = %s")
         with Conexion() as cn:
             cn.cursor().execute(sql, (max_intentos, id_usuario))
