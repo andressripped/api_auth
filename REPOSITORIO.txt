@@ -1,0 +1,21 @@
+Repositorio del proyecto
+========================
+
+https://github.com/andressripped/api_auth
+
+Evidencia GA7-220501096-AA5-EV01
+Diseno y desarrollo de servicios web - caso
+
+Servicio web de registro e inicio de sesion
+Python 3.12 - Flask - MySQL 8.0 - bcrypt - pytest
+
+Endpoints
+---------
+POST /api/registro   registra un usuario nuevo
+POST /api/login      valida las credenciales
+GET  /               comprobacion de estado de la API
+
+Julian Andres Albarracin Martinez
+Ficha 3336228
+Analisis y Desarrollo de Software
+Centro Agroturistico de San Gil - Regional Santander
